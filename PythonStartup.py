@@ -55,10 +55,23 @@ class file_manipulation:
             
 class dir:
 
-    def read_dir():
-        print("Current Dirrectory: ")
-        print(os.listdir(), "\n")
-        return os.listdir()
+    def read_dir(): #make this more readable
+        #i = 0
+        print("Current Directory: ") 
+        entries = os.listdir()
+        for entry in entries:
+            print(f">  {entry}")
+            # i += 1
+            # if(i == 3):
+            #     print()
+            #     i = 0
+            # if(entry == entries[len(entries)-1]):
+            #     print(f" {entry}\n")
+
+            # else:
+            #     print(f" {entry}" , end=",")
+
+        print()
 
     def change_dir(path):
             try:
@@ -67,12 +80,27 @@ class dir:
                 print(f"Invalid dir: {e}.")
 
 
+def sys_check(): # for clarity purposes
+    if(os.name == "nt"): # Windows
+        return True
+    elif(os.name == "posix"): # Mac or Linux
+        return False
+    else:
+        return True
 
 class main:
+    if(sys_check()): # for cmd purposes
+        def clear(): os.system("CLS")
+    else:
+        def clear(): os.system("clear")
+
+
     while(True):
-        os.system("CLS")
+        clear() # ide doesnt clear properly, run in cmd
         dir.read_dir()
-        file_choice = input("Input a File name / Directory:\n\n>>> ").strip() # revise this
+        file_choice = input(f"Input a File name / Directory to navigate (.. to go back)\nTo create a file/dir:\n> Create File\n> Make Directory\n\n>>> ").strip()
+        
+
 
         match file_choice[:4]: 
 
